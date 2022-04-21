@@ -1,0 +1,15 @@
+C:\Users\manzelmi\Documents\Tech_Github\Light_Sources_Examples\C#\KLS101\Initialize_and_Enable\obj\Debug\Initialize_and_Enable.csproj.AssemblyReference.cache
+C:\Users\manzelmi\Documents\Tech_Github\Light_Sources_Examples\C#\KLS101\Initialize_and_Enable\obj\Debug\Initialize_and_Enable.csproj.SuggestedBindingRedirects.cache
+C:\Users\manzelmi\Documents\Tech_Github\Light_Sources_Examples\C#\KLS101\Initialize_and_Enable\obj\Debug\Initialize_and_Enable.csproj.CoreCompileInputs.cache
+C:\Users\manzelmi\Documents\Tech_Github\Light_Sources_Examples\C#\KLS101\Initialize_and_Enable\bin\Debug\Initialize_and_Enable.exe.config
+C:\Users\manzelmi\Documents\Tech_Github\Light_Sources_Examples\C#\KLS101\Initialize_and_Enable\bin\Debug\Initialize_and_Enable.exe
+C:\Users\manzelmi\Documents\Tech_Github\Light_Sources_Examples\C#\KLS101\Initialize_and_Enable\bin\Debug\Initialize_and_Enable.pdb
+C:\Users\manzelmi\Documents\Tech_Github\Light_Sources_Examples\C#\KLS101\Initialize_and_Enable\bin\Debug\Thorlabs.MotionControl.DeviceManagerCLI.dll
+C:\Users\manzelmi\Documents\Tech_Github\Light_Sources_Examples\C#\KLS101\Initialize_and_Enable\bin\Debug\ThorLabs.MotionControl.KCube.LaserSourceCLI.dll
+C:\Users\manzelmi\Documents\Tech_Github\Light_Sources_Examples\C#\KLS101\Initialize_and_Enable\bin\Debug\Thorlabs.MotionControl.PrivateInternal.dll
+C:\Users\manzelmi\Documents\Tech_Github\Light_Sources_Examples\C#\KLS101\Initialize_and_Enable\bin\Debug\Thorlabs.MotionControl.Tools.Common.dll
+C:\Users\manzelmi\Documents\Tech_Github\Light_Sources_Examples\C#\KLS101\Initialize_and_Enable\bin\Debug\Thorlabs.MotionControl.Tools.Logging.dll
+C:\Users\manzelmi\Documents\Tech_Github\Light_Sources_Examples\C#\KLS101\Initialize_and_Enable\bin\Debug\Thorlabs.MotionControl.Tools.WPF.dll
+C:\Users\manzelmi\Documents\Tech_Github\Light_Sources_Examples\C#\KLS101\Initialize_and_Enable\obj\Debug\Initialize_and_Enable.csproj.CopyComplete
+C:\Users\manzelmi\Documents\Tech_Github\Light_Sources_Examples\C#\KLS101\Initialize_and_Enable\obj\Debug\Initialize_and_Enable.exe
+C:\Users\manzelmi\Documents\Tech_Github\Light_Sources_Examples\C#\KLS101\Initialize_and_Enable\obj\Debug\Initialize_and_Enable.pdb
