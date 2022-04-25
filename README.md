@@ -1,5 +1,5 @@
 # Light_Sources_Examples
-Software examples for Thorlabs products that produce light
+Software examples for Thorlabs products that emit light
 
 ## Repo Organization
 All examples are split up by programming language and product type. Directions on using specific examples are given within the folders.
