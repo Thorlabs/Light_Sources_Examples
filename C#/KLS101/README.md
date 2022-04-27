@@ -9,6 +9,7 @@ This example shows the basic initialization and use of the KLS101 laser source. 
 3. Copy the following dll's from the Kinesis installation folder to the bin of the startup project e.g \Light_Sources_Examples\C#\KLS101\Initialize_and_Enable\bin\Debug:
    * Thorlabs.MotionControl.DeviceManager.dll
    * Thorlabs.MotionControl.DeviceManagerCLI.dll
+   * Thorlabs.MotionControl.KCube.LaserSource.dll
    * Thorlabs.MotionControl.KCube.LaserSourceCLI.dll
    * Thorlabs.MotionControl.PrivateInternal.dll
 
