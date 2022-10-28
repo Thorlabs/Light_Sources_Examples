@@ -1,7 +1,7 @@
 ## Included Examples
 
 ### Initialize and Enable: 
-This example shows the basic initialization and use of the KLS101 laser source. This includes opening the source, initializing the settings, enabling the laser, setting the power, and closing the open resourses. 
+This example shows the basic initialization and use of the KLS101 laser source. This includes opening the source, initializing the settings, enabling the laser, setting the power, and closing the open resources. 
 This example uses libraries found in the Kinesis software install found here: https://www.thorlabs.com/software_pages/ViewSoftwarePage.cfm?Code=Motion_Control
 
 ## Build Instructions
