@@ -25,7 +25,7 @@ namespace SPDC_Example
             GetCurrentLimits(out limits);
             Console.WriteLine("Warning Limit: " + limits[0]);
 
-            SetPumpPower(50);
+            SetPumpPower(50); //Pump power in mW
 
             EnableSource();
             Thread.Sleep(5000);
@@ -62,9 +62,6 @@ namespace SPDC_Example
             else
             {
                 string[] segments = response.Split('\n');
-                //Console.WriteLine(segments.Length);
-                //Console.WriteLine(segments[0]);
-                //Console.WriteLine(segments[0].Substring(segments[0].IndexOf(":") + 1, segments[0].IndexOf(" ") - segments[0].IndexOf(":")));
                 limits = new double[] {
                     Double.Parse(segments[0].Substring(segments[0].IndexOf(":") + 1, segments[0].IndexOf(" ") - segments[0].IndexOf(":"))),
                     Double.Parse(segments[0].Substring(segments[1].IndexOf(":") + 1, segments[1].IndexOf(" ") - segments[1].IndexOf(":"))),
@@ -91,8 +88,10 @@ namespace SPDC_Example
 
         static int EnableSource()
         {
+            //Enable the driver and laser control
             string response = SendCommand("la on\r");
-            if (response.Equals("WRITE_ERROR") || response.Equals("READ_ERROR"))
+            response += SendCommand("en 1\r");
+            if (response.Contains("WRITE_ERROR") || response.Contains("READ_ERROR"))
             {
                 return 1;
             }
@@ -145,7 +144,6 @@ namespace SPDC_Example
             }
 
             string[] segments = response.Split('\n');
-            //Console.WriteLine(segments.Length);
 
             string commandReturn = "";
             if (segments.Length >= 3) //response has a return echo + val + cmd>

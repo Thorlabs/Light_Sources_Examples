@@ -28,12 +28,13 @@ def main():
     print('Return from the Limits Command: ')
     print(send_command(com, b'sh limit\r'))
 
-    print('Setting the pump power to 100mW')
-    send_command(com, b'ch 1 pow 100\r')
+    print('Setting the pump power to 150mW')
+    send_command(com, b'ch 1 pow 150\r')
 
     if(input('Type "on" to enable the laser\n').__eq__('on')):
         print('Turning the laser on')
         send_command(com, b'la on\r')
+        send_command(com, b'en 1\r')
 
     time.sleep(5)
 
