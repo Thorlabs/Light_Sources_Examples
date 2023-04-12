@@ -1,0 +1,10 @@
+C:\Users\manzelmi\source\repos\CHROLIS_Example\CHROLIS_Example\bin\Debug\CHROLIS_Example.exe.config
+C:\Users\manzelmi\source\repos\CHROLIS_Example\CHROLIS_Example\bin\Debug\CHROLIS_Example.exe
+C:\Users\manzelmi\source\repos\CHROLIS_Example\CHROLIS_Example\bin\Debug\CHROLIS_Example.pdb
+C:\Users\manzelmi\source\repos\CHROLIS_Example\CHROLIS_Example\bin\Debug\Thorlabs.TL6WL_64.Interop.dll
+C:\Users\manzelmi\source\repos\CHROLIS_Example\CHROLIS_Example\bin\Debug\Thorlabs.TL6WL_64.Interop.xml
+C:\Users\manzelmi\source\repos\CHROLIS_Example\CHROLIS_Example\obj\Debug\CHROLIS_Example.csproj.AssemblyReference.cache
+C:\Users\manzelmi\source\repos\CHROLIS_Example\CHROLIS_Example\obj\Debug\CHROLIS_Example.csproj.CoreCompileInputs.cache
+C:\Users\manzelmi\source\repos\CHROLIS_Example\CHROLIS_Example\obj\Debug\CHROLIS_Example.csproj.CopyComplete
+C:\Users\manzelmi\source\repos\CHROLIS_Example\CHROLIS_Example\obj\Debug\CHROLIS_Example.exe
+C:\Users\manzelmi\source\repos\CHROLIS_Example\CHROLIS_Example\obj\Debug\CHROLIS_Example.pdb
