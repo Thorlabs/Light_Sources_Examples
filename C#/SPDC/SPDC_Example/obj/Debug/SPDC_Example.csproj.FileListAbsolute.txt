@@ -1,0 +1,8 @@
+C:\Users\manzelmi\source\repos\SPDC\SPDC_Example\bin\Debug\SPDC_Example.exe.config
+C:\Users\manzelmi\source\repos\SPDC\SPDC_Example\bin\Debug\SPDC_Example.exe
+C:\Users\manzelmi\source\repos\SPDC\SPDC_Example\bin\Debug\SPDC_Example.pdb
+C:\Users\manzelmi\source\repos\SPDC\SPDC_Example\obj\Debug\SPDC_Example.csproj.AssemblyReference.cache
+C:\Users\manzelmi\source\repos\SPDC\SPDC_Example\obj\Debug\SPDC_Example.csproj.SuggestedBindingRedirects.cache
+C:\Users\manzelmi\source\repos\SPDC\SPDC_Example\obj\Debug\SPDC_Example.csproj.CoreCompileInputs.cache
+C:\Users\manzelmi\source\repos\SPDC\SPDC_Example\obj\Debug\SPDC_Example.exe
+C:\Users\manzelmi\source\repos\SPDC\SPDC_Example\obj\Debug\SPDC_Example.pdb

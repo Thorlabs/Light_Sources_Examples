@@ -1,0 +1,1908 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Thorlabs.TL6WL_64.Interop</name>
+    </assembly>
+    <members>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.#ctor(System.IntPtr)">
+            <summary>
+            This function creates an IVI instrument driver session, typically using the C session instrument handle.
+            </summary>
+            <param name="Instrument_Handle">
+            The instrument handle that is used to create an IVI instrument driver session.
+            </param>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.#ctor(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            This function initializes the instrument driver session and performs the following initialization actions:
+            
+            (1) Opens a session to the Default Resource Manager resource and a session to the specified device using the Resource Name  specified.
+            (2) Performs an identification query on the instrument.
+            (3) Resets the instrument to a known state.
+            (4) Sends initialization commands to the instrument.
+            (5) Returns an instrument handle which is used to distinguish between different sessions of this instrument driver.
+            
+            Note:
+            Each time this function is invoked a unique session is opened.  
+            </summary>
+            <param name="Resource_Name">
+            This parameter specifies the device (resource) with which to establish a communication session.
+            
+            Note: You should use TL6WL_getRsrcName() to get the Resource Name for your device.
+            </param>
+            <param name="ID_Query">
+            This parameter specifies whether an identification query is performed during the initialization process.
+            
+            VI_OFF (0): Skip query.
+            VI_ON  (1): Do query (default).
+            
+            </param>
+            <param name="Reset_Device">
+            This parameter specifies whether the instrument is reset during the initialization process.
+            
+            VI_OFF (0) - no reset 
+            VI_ON  (1) - instrument is reset (default)
+            
+            </param>
+        </member>
+        <member name="P:Thorlabs.TL6WL_64.Interop.TL6WL.Handle">
+            <summary>
+            Gets the instrument handle.
+            </summary>
+            <value>
+            The value is the IntPtr that represents the handle to the instrument.
+            </value>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.findRsrc(System.UInt32@)">
+            <summary>
+            Gets the number of connected devices available in your system that can be controlled with this driver.
+            
+            </summary>
+            <param name="Device_Count">
+            Returnes the number of connected devices you can control with this driver.
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.getRsrcName(System.UInt32,System.Text.StringBuilder)">
+            <summary>
+            Gets resource string of a connected device you can control with this driver.
+            
+            Note:
+            The resource string is valid as input parameter to TL6WL_init();
+            
+            </summary>
+            <param name="Device_Index">
+            Index of the connected device you want to get the resource name from (0 to number of connected devices - 1).
+            see TL6WL_findRsrc()
+            </param>
+            <param name="Resource_Name">
+            A 256 byte string buffer to receive the ressource identification string. 
+            Use this string in function TL6WL_init().
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.getRsrcInfo(System.UInt32,System.Text.StringBuilder,System.Text.StringBuilder,System.Text.StringBuilder,System.Boolean@)">
+            <summary>
+            Returns information about available devices in your system as e.g. device name and serial number.
+            
+            Note:
+            his information is available even before you opened the device with TL6WL_init().
+            
+            </summary>
+            <param name="Device_Index">
+            Index of the connected device you want to get the resource name from (0 to number of connected devices - 1).
+            see TL6WL_findRsrc()
+            </param>
+            <param name="Device_name">
+            A 256 byte string buffer to store the device model name for the device at given index
+            </param>
+            <param name="Serial_Number">
+            A 256 byte string buffer to store the serial number for the device at given index
+            </param>
+            <param name="Manufacturer_name">
+            A 256 byte string buffer to store the manufacturer for the device at given index
+            </param>
+            <param name="Resource_in_use">
+            Always false!
+            The function cannot detect devices used by other applications.
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.identificationQuery(System.Text.StringBuilder,System.Text.StringBuilder,System.Text.StringBuilder)">
+            <summary>
+            This function returns device identification information.
+            </summary>
+            <param name="Manufacturer_Name">
+            This parameter returns the manufacturer name.
+            
+            Notes:
+            (1) The array must contain at least 256 elements ViChar[256].
+            (2) You may pass VI_NULL if you do not need this value.
+            
+            </param>
+            <param name="Device_Name">
+            This parameter returns the device name.
+            
+            Notes:
+            (1) The array must contain at least 256 elements ViChar[256].
+            (2) You may pass VI_NULL if you do not need this value.
+            
+            </param>
+            <param name="Serial_Number">
+            This parameter returns the device serial number.
+            
+            Notes:
+            (1) The array must contain at least 256 elements ViChar[256].
+            (2) You may pass VI_NULL if you do not need this value.
+            
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.selfTest(System.Int16@,System.Text.StringBuilder)">
+            <summary>
+            This function runs the device self test routine and returns the test result.
+            </summary>
+            <param name="Self_Test_Result">
+            This parameter contains the value returned from the device self test routine. A retured zero value indicates a successful run, a value other than zero indicates failure.
+            </param>
+            <param name="Description">
+            This parameter returns the interpreted code as an user readable message string.
+            
+            Note:
+            The array must contain at least 256 elements ViChar[256].
+            
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.reset">
+            <summary>
+            This function resets the device to a known state
+            </summary>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.revisionQuery(System.Text.StringBuilder,System.Text.StringBuilder,System.Text.StringBuilder)">
+            <summary>
+            This function returns the revision numbers of the instrument driver and the device firmware(s).
+            </summary>
+            <param name="Instrument_Driver_Revision">
+            This parameter returns the Instrument Driver revision.
+            
+            Notes:
+            (1) The array must contain at least 256 elements ViChar[256].
+            (2) You may pass VI_NULL if you do not need this value.
+            
+            </param>
+            <param name="Chrolis_Firmware_Revision">
+            This parameter returns the device firmware revision. 
+            
+            Notes:
+            (1) The array must contain at least 256 elements ViChar[256].
+            (2) You may pass VI_NULL if you do not need this value.
+            
+            </param>
+            <param name="Timing_Unit_Firmware_Revision">
+            This parameter returns the timing unit device firmware revision. 
+            
+            Notes:
+            (1) The array must contain at least 256 elements ViChar[256].
+            (2) You may pass VI_NULL if you do not need this value.
+            
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.getCalibrationMsg(System.Text.StringBuilder)">
+            <summary>
+            This function returns the revision numbers of the instrument driver and the device firmware(s).
+            </summary>
+            <param name="Calibration_Message">
+            This parameter returns the Instrument Calibration Message. This is usually the date of the last and the date of the next due calibration.
+            
+            Note:
+            The array must contain at least 256 elements ViChar[256].
+            
+            
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.getManufactureDate(System.Text.StringBuilder)">
+            <summary>
+            This function returns the revision numbers of the instrument driver and the device firmware(s).
+            </summary>
+            <param name="Manufacture_Date">
+            This parameter returns the Instrument Manufacture Date.
+            
+            Note:
+            The array must contain at least 256 elements ViChar[256].
+            
+            
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.errorQuery(System.Int32@,System.Text.StringBuilder)">
+            <summary>
+            This function queries the instrument's error queue manually. 
+            Use this function to query the instrument's error queue if the driver's error query mode is set to manual query. 
+            
+            </summary>
+            <param name="Error_Number">
+            This parameter returns the instrument error number.
+            
+            Note: 
+            You may pass VI_NULL if you don't need this value.
+            
+            </param>
+            <param name="Error_Message">
+            This parameter returns the instrument error message.
+            
+            Notes:
+            (1) The array must contain at least 256 elements ViChar[256].
+            (2) You may pass VI_NULL if you do not need this value.
+            
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.getBoxStatus(System.UInt32@)">
+            <summary>
+            This function returns the current status of the device.
+            
+            </summary>
+            <param name="Box_Status">
+            This parameter returns the internal status value of the CHROLIS. The status is an integer value with lower 7 bit (bit0 ... bit6) indicating  internal information as follows:
+            
+            bit0 (status &amp; 0x01): Box is open
+            bit1 (status &amp; 0x02): LLG not connected
+            bit2 (status &amp; 0x04): Interlock is open
+            bit3 (status &amp; 0x08): Using default adjustment
+            bit4 (status &amp; 0x10): Box overheated
+            bit5 (status &amp; 0x20): LED overheated
+            bit6 (status &amp; 0x40): Box setup invalid
+            
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.registerBoxStatusChangedHandler(Thorlabs.TL6WL_64.Interop.TL6WL.Box6WL_StatusChangedHandler)">
+            <summary>
+            This function registers a callback function. The callback will be called whenever the box internal status changed. 
+            
+            </summary>
+            <param name="Box_Status_Changed_Handler">
+            This parameter accepts the callback function that will be called by the driver when a box status changed.
+            
+            The function prototype to be used is:
+            void Box6WL_StatusChangedHandler(ViUInt32 statRegist);
+            
+            In the above function call parameter statRegist represents the internal status value of the CHROLIS. The status is an integer value with lower 7 bit (bit0 ... bit6) indicating  internal information as follows:
+            
+            bit0 (status &amp; 0x01): Box is open
+            bit1 (status &amp; 0x02): LLG not connected
+            bit2 (status &amp; 0x04): Interlock is open
+            bit3 (status &amp; 0x08): Using default adjustment
+            bit4 (status &amp; 0x10): Box overheated
+            bit5 (status &amp; 0x20): LED overheated
+            bit6 (status &amp; 0x40): Box setup invalid
+            
+            Pass NULL to disable the callbacks again.
+            
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.getLED_HeadTemperature(System.Double@,System.Double@,System.Double@,System.Double@,System.Double@,System.Double@)">
+            <summary>
+            This function returns the temperatures of the CHROLIS LEDs.
+            </summary>
+            <param name="Temperature_LED_1">
+            This parameter returns the temperature in degree Celsius from LED1.
+            </param>
+            <param name="Temperature_LED_2">
+            This parameter returns the temperature in degree Celsius from LED2.
+            </param>
+            <param name="Temperature_LED_3">
+            This parameter returns the temperature in degree Celsius from LED3.
+            </param>
+            <param name="Temperature_LED_4">
+            This parameter returns the temperature in degree Celsius from LED4.
+            </param>
+            <param name="Temperature_LED_5">
+            This parameter returns the temperature in degree Celsius from LED5.
+            </param>
+            <param name="Temperature_LED_6">
+            This parameter returns the temperature in degree Celsius from LED6.
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.startObserveLED_HeadTemperature(Thorlabs.TL6WL_64.Interop.TL6WL.LED_HeadTemperHandler)">
+            <summary>
+            This function registers a callback function. The callback will be called every second with newly measured LED head temperature values. 
+            
+            </summary>
+            <param name="Temperature_Meas_Handler">
+            This parameter accepts the callback function. The driver will call it every second (1Hz) with the latest LED head temperature measurement results.
+            
+            The function prototype to be used is:
+            void LED_HeadTemperHandler(ViUInt8 bitmask, ViInt16 tempers[]);
+            
+            In the above function call parameter bitmnask has one bit set per LED that reports a temperature.
+            
+            t.b.d. change temperatur array to ViReal64 from uint16_t
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.stopObserveLED_HeadTemperature">
+            <summary>
+            This functions stops the driver from calling the callback registered with TL6WL_startObserveLED_HeadTemperature().
+            </summary>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.startObserveLED_HeadTempEx(Thorlabs.TL6WL_64.Interop.TL6WL.LED_HeadTemperHandlerEx)">
+            <summary>
+            This function registers a callback function. The callback will be called every second with newly measured LED head temperature values. 
+            
+            </summary>
+            <param name="Temperature_Meas_Handler">
+            This parameter accepts the callback function. The driver will call it every second (1Hz) with the latest LED head temperature measurement results.
+            
+            The function prototype to be used is:
+            void LED_HeadTemperHandler(ViUInt8 bitmask, ViReal64 temps[]);
+            
+            In the above function call parameter bitmask has one bit set per LED that reports a temperature.
+            
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.stopObserveLED_HeadTempEx">
+            <summary>
+            This functions stops the driver from calling the callback registered with TL6WL_startObserveLED_HeadTempEx().
+            </summary>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.getBoxTemperature(System.Double@)">
+            <summary>
+            This function returns the CHROLIS temperature.
+            </summary>
+            <param name="Box_Temperature">
+            This parameter returns the temperature of the CHROLIS in degree Celsius.
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.getLLGTemperature(System.Double@)">
+            <summary>
+            This function returns the LLG temperature.
+            </summary>
+            <param name="LLG_Temperature">
+            This parameter returns the temperature of the Liquid Light Guide (LLG) in degree Celsius.
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.getCPUTemperature(System.Double@)">
+            <summary>
+            This function returns the CHROLIS CPU temperature.
+            </summary>
+            <param name="CPU_Temperature">
+            This parameter returns the temperature of the CHROLIS CPU in degree Celsius.
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.getLED_HeadMeasCurrent(System.Double@,System.Double@,System.Double@,System.Double@,System.Double@,System.Double@)">
+            <summary>
+            This function returns the measured LED currents of the CHROLIS LEDs.
+            </summary>
+            <param name="Current_LED_1">
+            This parameter returns the LED current in Ampere from LED1.
+            </param>
+            <param name="Current_LED_2">
+            This parameter returns the LED current in Ampere from LED2.
+            </param>
+            <param name="Current_LED_3">
+            This parameter returns the LED current in Ampere from LED3.
+            </param>
+            <param name="Current_LED_4">
+            This parameter returns the LED current in Ampere from LED4.
+            </param>
+            <param name="Current_LED_5">
+            This parameter returns the LED current in Ampere from LED5.
+            </param>
+            <param name="Current_LED_6">
+            This parameter returns the LED current in Ampere from LED6.
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.getLED_HeadMeasCathodeVoltage(System.Double@,System.Double@,System.Double@,System.Double@,System.Double@,System.Double@)">
+            <summary>
+            This function returns the measured LED cathode voltages of the CHROLIS LEDs.
+            </summary>
+            <param name="Cathode_Voltage_LED_1">
+            This parameter returns the LED cathode volatge in Volts from LED1.
+            </param>
+            <param name="Cathode_Voltage_LED_2">
+            This parameter returns the LED cathode volatge in Volts from LED2.
+            </param>
+            <param name="Cathode_Voltage_LED_3">
+            This parameter returns the LED cathode volatge in Volts from LED3.
+            </param>
+            <param name="Cathode_Voltage_LED_4">
+            This parameter returns the LED cathode volatge in Volts from LED4.
+            </param>
+            <param name="Cathode_Voltage_LED_5">
+            This parameter returns the LED cathode volatge in Volts from LED5.
+            </param>
+            <param name="Cathode_Voltage_LED_6">
+            This parameter returns the LED cathode volatge in Volts from LED6.
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.setLED_HeadPowerStates(System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            This function affects all CHROLIS LEDs simulatneously. It enables or disables all LEDs at once.
+            </summary>
+            <param name="Enable_LED_1">
+            This parameter determines whether LED1 shall switch on or off.
+            Use VI_TRUE  (1) to switch on LED.
+            Use VI_FALSE (0) to switch off the LED.
+            </param>
+            <param name="Enable_LED_2">
+            This parameter determines whether LED2 shall switch on or off.
+            Use VI_TRUE  (1) to switch on LED.
+            Use VI_FALSE (0) to switch off the LED.
+            </param>
+            <param name="Enable_LED_3">
+            This parameter determines whether LED3 shall switch on or off.
+            Use VI_TRUE  (1) to switch on LED.
+            Use VI_FALSE (0) to switch off the LED.
+            </param>
+            <param name="Enable_LED_4">
+            This parameter determines whether LED4 shall switch on or off.
+            Use VI_TRUE  (1) to switch on LED.
+            Use VI_FALSE (0) to switch off the LED.
+            </param>
+            <param name="Enable_LED_5">
+            This parameter determines whether LED5 shall switch on or off.
+            Use VI_TRUE  (1) to switch on LED.
+            Use VI_FALSE (0) to switch off the LED.
+            </param>
+            <param name="Enable_LED_6">
+            This parameter determines whether LED6 shall switch on or off.
+            Use VI_TRUE  (1) to switch on LED.
+            Use VI_FALSE (0) to switch off the LED.
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.getLED_HeadPowerStates(System.Boolean@,System.Boolean@,System.Boolean@,System.Boolean@,System.Boolean@,System.Boolean@)">
+            <summary>
+            This function reports the power states (on or off) off all CHROLIS LEDs simultaneously.
+            </summary>
+            <param name="Enable_LED_1">
+            This parameter returns the power state of LED1.
+            VI_TRUE (1)  when LED is on.
+            VI_FALSE (0) when LED is off.
+            </param>
+            <param name="Enable_LED_2">
+            This parameter returns the power state of LED2.
+            VI_TRUE (1)  when LED is on.
+            VI_FALSE (0) when LED is off.
+            </param>
+            <param name="Enable_LED_3">
+            This parameter returns the power state of LED3.
+            VI_TRUE (1)  when LED is on.
+            VI_FALSE (0) when LED is off.
+            </param>
+            <param name="Enable_LED_4">
+            This parameter returns the power state of LED4.
+            VI_TRUE (1)  when LED is on.
+            VI_FALSE (0) when LED is off.
+            </param>
+            <param name="Enable_LED_5">
+            This parameter returns the power state of LED5.
+            VI_TRUE (1)  when LED is on.
+            VI_FALSE (0) when LED is off.
+            </param>
+            <param name="Enable_LED_6">
+            This parameter returns the power state of LED6.
+            VI_TRUE (1)  when LED is on.
+            VI_FALSE (0) when LED is off.
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.registerPowerStateChangedHandler(Thorlabs.TL6WL_64.Interop.TL6WL.LED_PowerStateChangedHandler)">
+            <summary>
+            This function registers a callback function. The callback will be called whenever one of the six the LED staes changed. 
+            
+            </summary>
+            <param name="Power_State_Changed_Handler">
+            This parameter accepts the callback function that will be called by the driver when the state of an LED changed.
+            
+            The callback function must not call any other function of this driver without a context change!
+            
+            The function prototype to be used is:
+            void LED_PowerStateChangedHandler(ViUInt8 bitmask, ViUInt8 enableState);
+            
+            In the above function call parameter bitmask represents the valid LEDs and parameter enableState represents the state (on or off) off the LEDs of the CHROLIS. The vlues are integer values with lower 6 bit (bit0 ... bit5) indicating the LED number as follows:
+            
+            bit0 (status &amp; 0x01): LED1
+            bit1 (status &amp; 0x02): LED2
+            bit2 (status &amp; 0x04): LED3
+            bit3 (status &amp; 0x08): LED4
+            bit4 (status &amp; 0x10): LED5
+            bit5 (status &amp; 0x20): LED6
+            
+            A bit set in parameter bitmask indicates that the result is valid for this LED.
+            
+            A bit set in parameter enableState indicates that the LED state is on, a bit reset insdcates off. These indications are only valid when the corresponding bit in parameter bitmask is set (!)
+            
+            Pass NULL to disable the callbacks again.
+            
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.setLED_HeadBrightness(System.Int16,System.Int16,System.Int16,System.Int16,System.Int16,System.Int16)">
+            <summary>
+            This function will set the brightness of all six CHROLIS LEDs at once.
+            </summary>
+            <param name="Brightness_LED_1">
+            This parameter accepts a brightness value for LED1.
+            The value range is 0 ... 1000.
+            </param>
+            <param name="Brightness_LED_2">
+            This parameter accepts a brightness value for LED2.
+            The value range is 0 ... 1000.
+            </param>
+            <param name="Brightness_LED_3">
+            This parameter accepts a brightness value for LED3.
+            The value range is 0 ... 1000.
+            </param>
+            <param name="Brightness_LED_4">
+            This parameter accepts a brightness value for LED4.
+            The value range is 0 ... 1000.
+            </param>
+            <param name="Brightness_LED_5">
+            This parameter accepts a brightness value for LED5.
+            The value range is 0 ... 1000.
+            </param>
+            <param name="Brightness_LED_6">
+            This parameter accepts a brightness value for LED6.
+            The value range is 0 ... 1000.
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.getLED_HeadBrightness(System.UInt16@,System.UInt16@,System.UInt16@,System.UInt16@,System.UInt16@,System.UInt16@)">
+            <summary>
+            This function eports the currently used values for all six CHROLIS LED brightness.
+            </summary>
+            <param name="Brightness_LED_1">
+            This parameter reports the brightness for LED1.
+            Range is 0 ... 1000.
+            </param>
+            <param name="Brightness_LED_2">
+            This parameter reports the brightness for LED2.
+            Range is 0 ... 1000.
+            </param>
+            <param name="Brightness_LED_3">
+            This parameter reports the brightness for LED3.
+            Range is 0 ... 1000.
+            </param>
+            <param name="Brightness_LED_4">
+            This parameter reports the brightness for LED4.
+            Range is 0 ... 1000.
+            </param>
+            <param name="Brightness_LED_5">
+            This parameter reports the brightness for LED5.
+            Range is 0 ... 1000.
+            </param>
+            <param name="Brightness_LED_6">
+            This parameter reports the brightness for LED6.
+            Range is 0 ... 1000.
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.startObserveLED_HeadBrightness(Thorlabs.TL6WL_64.Interop.TL6WL.LED_HeadBrightnessChangedHandler)">
+            <summary>
+            This function registers a callback function. The callback will be called whenever the brightness of one of the CHROLIS LEDs is changed. 
+            
+            </summary>
+            <param name="Brightness_Changed_Handler">
+            This parameter accepts the callback function. The driver will call it whenever the brightness of one or more of the LEDs gets changed.
+            
+            The registered function must not call any other function of this driver without a context change!
+            
+            To end calling of the callback by the driver use TL6WL_stopObserveLED_HeadBrightness(). 
+            
+            The function prototype to be used is:
+            void LED_HeadBrightnessChangedHandler(ViUInt16 linearMode, ViUInt8 bitmask, ViUInt16 brigtness[]);
+            
+            In the above function call parameter bitmnask has one bit set per LED that reports a temperature.
+            
+            t.b.d. change temperatur array to ViReal64 from uint16_t
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.stopObserveLED_HeadBrightness">
+            <summary>
+            This functions stops the driver from calling the callback registered with TL6WL_startObserveLED_HeadBrightness().
+            </summary>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.startObserveLED_HeadBrightnessEx(Thorlabs.TL6WL_64.Interop.TL6WL.LED_HeadBrightnessChangedHandlerEx)">
+            <summary>
+            This function registers a callback function. The callback will be called whenever the brightness of one of the CHROLIS LEDs is changed. 
+            
+            </summary>
+            <param name="Brightness_Changed_Handler">
+            This parameter accepts the callback function. The driver will call it whenever the brightness of one or more of the LEDs gets changed.
+            
+            The registered function must not call any other function of this driver without a context change!
+            
+            To end calling of the callback by the driver use TL6WL_stopObserveLED_HeadBrightnessEx(). 
+            
+            The function prototype to be used is:
+            void LED_HeadBrightnessChangedHandler(ViReal64 linearMode, ViUInt8 bitmask, ViReal64 brigtness[]);
+            
+            In the above function call parameter bitmnask has one bit set per LED that reports a temperature.
+            
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.stopObserveLED_HeadBrightnessEx">
+            <summary>
+            This functions stops the driver from calling the callback registered with TL6WL_startObserveLED_HeadBrightnessEx().
+            </summary>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.setLED_LinearModeValue(System.UInt16)">
+            <summary>
+            This function sets a relative brightness vale for all LEDs.
+            </summary>
+            <param name="Brightness">
+            This parameter accepts the overall relative brightness value applied to all LEDs simultaneously.
+            Valid range is 0 ... 1000.
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.getLED_LinearModeValue(System.UInt16@)">
+            <summary>
+            This function reports the overall relative LED brightness.
+            </summary>
+            <param name="Brightness">
+            This parameter reports the overall relative brightness fpor all LEDs. Range is 0 ... 1000.
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.writeLED_HeadCustomName(System.Byte,System.String)">
+            <summary>
+            This function writes the user name for a LED to the device.
+            </summary>
+            <param name="LED_Nr_">
+            This parameter accepts the LED number.
+            Range 1 ... 6.
+            </param>
+            <param name="LED_Name">
+            This parameter accepts a user name for the LED.
+            The string can have up to 120 characters (including trailing zero).
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readLED_HeadCustomName(System.Byte,System.Text.StringBuilder)">
+            <summary>
+            This function reads the user name for a LED from the device.
+            </summary>
+            <param name="LED_Nr">
+            This parameter accepts the LED number.
+            Range 1 ... 6.
+            </param>
+            <param name="LED_Name">
+            This parameter returns the user name of the LED.
+            
+            The buffer passed to this function must have at least 120 characters.
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readLED_HeadSpectrum(System.Byte,System.UInt16@,System.Int16[],System.Double[])">
+            <summary>
+            This function reads the spectrum of the LED.
+            </summary>
+            <param name="LED_Nr">
+            This parameter accepts the LED number.
+            Range 1 ... 6.
+            </param>
+            <param name="Data_Points">
+            This parameter returns the number of data points in the spectrum.
+            </param>
+            <param name="Wavelength">
+            This parameter returns an array of wavelengths [nm] for the spectrum of the LED.
+            
+            The array has to be at least of size LED_HEAD_MAX_SPEC_CURVE_DATA_POINTS (1000).
+            
+            </param>
+            <param name="Norm_Power">
+            This parameter returns an array of relative power [a.u.] for the spectrum of the LED. Range is 0.0 ... 1.0.
+            
+            The array has to be at least of size LED_HEAD_MAX_SPEC_CURVE_DATA_POINTS (1000).
+            
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readLED_HeadSpectrumRange(System.Byte,System.UInt16@,System.UInt16@)">
+            <summary>
+            This function returns the wavelength range of the LED in [nm].
+            </summary>
+            <param name="LED_Nr_">
+            This parameter accepts the LED number.
+            Range 1 ... 6.
+            </param>
+            <param name="Min_Wavelength">
+            This parameter returns the lower limit of the LED's wavelength range [nm].
+            </param>
+            <param name="Max_Wavelength">
+            This parameter returns the upper limit of the LED's wavelength range [nm].
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readLED_HeadCentroidWL(System.Byte,System.UInt16@)">
+            <summary>
+            This functions returns the centroid wavelength of the LED.
+            
+            </summary>
+            <param name="LED_Nr_">
+            This parameter accepts the LED number.
+            Range 1 ... 6.
+            </param>
+            <param name="Centroid_Wavelength">
+            This parameter returns the centroid wavelength of the LED [nm].
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readLED_HeadPeakWL(System.Byte,System.UInt16@)">
+            <summary>
+            This functions returns the peak wavelength of the LED.
+            
+            </summary>
+            <param name="LED_Nr_">
+            This parameter accepts the LED number.
+            Range 1 ... 6.
+            </param>
+            <param name="Peak_Wavelength">
+            This parameter returns the peak wavelength of the LED [nm].
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readLED_HeadFWHMW(System.Byte,System.UInt16@,System.UInt16@)">
+            <summary>
+            This function returns the full width half max wavelentgh (FWHM) range of the LED in [nm].
+            </summary>
+            <param name="LED_Nr_">
+            This parameter accepts the LED number.
+            Range 1 ... 6.
+            </param>
+            <param name="Lower_FWHM_Wavelength">
+            This parameter returns the lower limit of the LED's full width half max (FWHM) wavelength range [nm].
+            </param>
+            <param name="Upper_FWHM_Wavelength">
+            This parameter returns the upper limit of the LED's full width half max (FWHM) wavelength range [nm].
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readLED_HeadOoe2(System.Byte,System.UInt16@,System.UInt16@)">
+            <summary>
+            This function returns the 1/e? wavelentgh range of the LED in [nm].
+            </summary>
+            <param name="LED_Nr_">
+            This parameter accepts the LED number.
+            Range 1 ... 6.
+            </param>
+            <param name="Lower_1_e__Wavelength">
+            This parameter returns the lower limit of the LED's 1/e? wavelength range [nm].
+            </param>
+            <param name="Upper_1_e__Wavelength">
+            This parameter returns the upper limit of the LED's 1/e? wavelength range [nm].
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readLED_HeadPmaxCC(System.Byte,System.Double@,System.Double@)">
+            <summary>
+            This function returns the maximum LED output power and the coupling coefficient of the LED as used in the CHROLIS.
+            
+            Together with the spectral responsivity of the used dichroic filters these values can be used to calculate the output power at the light exit of the liquid light guide (LLG).
+            
+            </summary>
+            <param name="LED_Nr_">
+            This parameter accepts the LED number.
+            Range 1 ... 6.
+            </param>
+            <param name="max__Power">
+            This parameter returns the maximum LED output power [W].
+            </param>
+            <param name="Coupling_coefficient">
+            This parameter returns the coupling coefficient CC [a.u.].
+            The coupling coefficient is used to calculate the overall output power of the LED at the liquid light guide exit. Where:
+            
+            Pllg = CC * Pmax * CC_Dichroits
+            
+            with:
+            CC = the coupling coefficient described here
+            Pmax = the maximum LED output power as obtained with this function
+            CC_Dichroits is the wavelength dependent coupling (transmission or reflection) coefficient of the used dichroit filters.
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readLED_HeadsName(System.Text.StringBuilder,System.Text.StringBuilder,System.Text.StringBuilder,System.Text.StringBuilder,System.Text.StringBuilder,System.Text.StringBuilder)">
+            <summary>
+            This function reads the names of all CHROLIS LEDs simultaneously.
+            </summary>
+            <param name="Name_LED_1">
+            This parameter receives the name of LED1.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="Name_LED_2">
+            This parameter receives the name of LED2.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="Name_LED_3">
+            This parameter receives the name of LED3.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="Name_LED_4">
+            This parameter receives the name of LED4.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="Name_LED_5">
+            This parameter receives the name of LED5.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="Name_LED_6">
+            This parameter receives the name of LED6.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readLED_HeadsSerial(System.Text.StringBuilder,System.Text.StringBuilder,System.Text.StringBuilder,System.Text.StringBuilder,System.Text.StringBuilder,System.Text.StringBuilder)">
+            <summary>
+            This function reads the serial numbers of all CHROLIS LEDs simultaneously.
+            </summary>
+            <param name="SN_LED_1">
+            This parameter returns the serial number of LED1.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="SN_LED_2">
+            This parameter returns the serial number of LED2.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="SN_LED_3">
+            This parameter returns the serial number of LED3.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="SN_LED_4">
+            This parameter returns the serial number of LED4.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="SN_LED_5">
+            This parameter returns the serial number of LED5.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="SN_LED_6">
+            This parameter returns the serial number of LED6.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readLED_HeadsManfDate(System.Text.StringBuilder,System.Text.StringBuilder,System.Text.StringBuilder,System.Text.StringBuilder,System.Text.StringBuilder,System.Text.StringBuilder)">
+            <summary>
+            This function reads the manufacture date of all CHROLIS LEDs simultaneously.
+            </summary>
+            <param name="Date_LED_1">
+            This parameter returns the manufacture date of LED1.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="Date_LED_2">
+            This parameter returns the manufacture date of LED2.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="Date_LED_3">
+            This parameter returns the manufacture date of LED3.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="Date_LED_4">
+            This parameter returns the manufacture date of LED4.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="Date_LED_5">
+            This parameter returns the manufacture date of LED5.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="Date_LED_6">
+            This parameter returns the manufacture date of LED6.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readLED_HeadsColorName(System.Text.StringBuilder,System.Text.StringBuilder,System.Text.StringBuilder,System.Text.StringBuilder,System.Text.StringBuilder,System.Text.StringBuilder)">
+            <summary>
+            This function reads the color names all CHROLIS LEDs simultaneously.
+            </summary>
+            <param name="Color_LED_1">
+            This parameter returns the color name of LED1.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="Color_LED_2">
+            This parameter returns the color name of LED2.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="Color_LED_3">
+            This parameter returns the color name of LED3.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="Color_LED_4">
+            This parameter returns the color name of LED4.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="Color_LED_5">
+            This parameter returns the color name of LED5.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="Color_LED_6">
+            This parameter returns the color name of LED6.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readLED_HeadsMaxCurrent(System.Double@,System.Double@,System.Double@,System.Double@,System.Double@,System.Double@)">
+            <summary>
+            This function reads the maximum current for the CHROLIS LEDs [A].
+            </summary>
+            <param name="Current_LED_1">
+            This parameter reports the maximum current for LED1 [A].
+            </param>
+            <param name="Current_LED_2">
+            This parameter reports the maximum current for LED2 [A].
+            </param>
+            <param name="Current_LED_3">
+            This parameter reports the maximum current for LED3 [A].
+            </param>
+            <param name="Current_LED_4">
+            This parameter reports the maximum current for LED4 [A].
+            </param>
+            <param name="Current_LED_5">
+            This parameter reports the maximum current for LED5 [A].
+            </param>
+            <param name="Current_LED_6">
+            This parameter reports the maximum current for LED6 [A].
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readLED_HeadsTempCool(System.Double@,System.Double@,System.Double@,System.Double@,System.Double@,System.Double@)">
+            <summary>
+            This function reads the 'cool' emperatures for the CHROLIS LEDs.
+            
+            Below the 'cool' temperature the cooling fan for the LEDs will run at idle speed.
+            </summary>
+            <param name="Cool_Temp__LED_1">
+            This parameter reports the 'cool' temperature for LED1 [deg. Celsius].
+            </param>
+            <param name="Cool_Temp__LED_2">
+            This parameter reports the 'cool' temperature for LED2 [deg. Celsius].
+            </param>
+            <param name="Cool_Temp__LED_3">
+            This parameter reports the 'cool' temperature for LED3 [deg. Celsius].
+            </param>
+            <param name="Cool_Temp__LED_4">
+            This parameter reports the 'cool' temperature for LED4 [deg. Celsius].
+            </param>
+            <param name="Cool_Temp__LED_5">
+            This parameter reports the 'cool' temperature for LED5 [deg. Celsius].
+            </param>
+            <param name="Cool_Temp__LED_6">
+            This parameter reports the 'cool' temperature for LED6 [deg. Celsius].
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readLED_HeadsTempHot(System.Double@,System.Double@,System.Double@,System.Double@,System.Double@,System.Double@)">
+            <summary>
+            This function reads the 'hot' emperatures for the CHROLIS LEDs.
+            
+            At and above the 'hot' temperature the cooling fan for the LEDs will run at maximum speed.
+            </summary>
+            <param name="Hot_Temp__LED_1">
+            This parameter reports the 'hot' temperature for LED1 [deg. Celsius].
+            </param>
+            <param name="Hot_Temp__LED_2">
+            This parameter reports the 'hot' temperature for LED2 [deg. Celsius].
+            </param>
+            <param name="Hot_Temp__LED_3">
+            This parameter reports the 'hot' temperature for LED3 [deg. Celsius].
+            </param>
+            <param name="Hot_Temp__LED_4">
+            This parameter reports the 'hot' temperature for LED4 [deg. Celsius].
+            </param>
+            <param name="Hot_Temp__LED_5">
+            This parameter reports the 'hot' temperature for LED5 [deg. Celsius].
+            </param>
+            <param name="Hot_Temp__LED_6">
+            This parameter reports the 'hot' temperature for LED6 [deg. Celsius].
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readLED_HeadsTempMax(System.Double@,System.Double@,System.Double@,System.Double@,System.Double@,System.Double@)">
+            <summary>
+            This function reads the 'maximum' temperatures for the CHROLIS LEDs.
+            
+            At and above the 'maximum' temperature the LEDs will be switched off.
+            </summary>
+            <param name="Max__Temp__LED_1">
+            This parameter reports the 'maximum' temperature for LED1 [deg. Celsius].
+            </param>
+            <param name="Max__Temp__LED_2">
+            This parameter reports the 'maximum' temperature for LED2 [deg. Celsius].
+            </param>
+            <param name="Max__Temp__LED_3">
+            This parameter reports the 'maximum' temperature for LED3 [deg. Celsius].
+            </param>
+            <param name="Max__Temp__LED_4">
+            This parameter reports the 'maximum' temperature for LED4 [deg. Celsius].
+            </param>
+            <param name="Max__Temp__LED_5">
+            This parameter reports the 'maximum' temperature for LED5 [deg. Celsius].
+            </param>
+            <param name="Max__Temp__LED_6">
+            This parameter reports the 'maximum' temperature for LED6 [deg. Celsius].
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readLED_HeadsMaxFreq(System.Double@,System.Double@,System.Double@,System.Double@,System.Double@,System.Double@)">
+            <summary>
+            This function reads the maximum modulation frequencies for the CHROLIS LEDs.
+            
+            </summary>
+            <param name="Max__Freq__LED_1">
+            This parameter reports the maximum modulation frequency for LED1 [Hz].
+            </param>
+            <param name="Max__Freq__LED_2">
+            This parameter reports the maximum modulation frequency for LED2 [Hz].
+            </param>
+            <param name="Max__Freq__LED_3">
+            This parameter reports the maximum modulation frequency for LED3 [Hz].
+            </param>
+            <param name="Max__Freq__LED_4">
+            This parameter reports the maximum modulation frequency for LED4 [Hz].
+            </param>
+            <param name="Max__Freq__LED_5">
+            This parameter reports the maximum modulation frequency for LED5 [Hz].
+            </param>
+            <param name="Max__Freq__LED_6">
+            This parameter reports the maximum modulation frequency for LED6 [Hz].
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readLED_HeadsMaxUfwd(System.Double@,System.Double@,System.Double@,System.Double@,System.Double@,System.Double@)">
+            <summary>
+            This function reads the maximum forward voltage for the CHROLIS LEDs.
+            
+            </summary>
+            <param name="Max__Ufwd_LED_1">
+            This parameter reports the maximum forward voltage for LED1 [V].
+            </param>
+            <param name="Max__Ufwd_LED_2">
+            This parameter reports the maximum forward voltage for LED2 [V].
+            </param>
+            <param name="Max__Ufwd_LED_3">
+            This parameter reports the maximum forward voltage for LED3 [V].
+            </param>
+            <param name="Max__Ufwd_LED_4">
+            This parameter reports the maximum forward voltage for LED4 [V].
+            </param>
+            <param name="Max__Ufwd_LED_5">
+            This parameter reports the maximum forward voltage for LED5 [V].
+            </param>
+            <param name="Max__Ufwd_LED_6">
+            This parameter reports the maximum forward voltage for LED6 [V].
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readLED_HeadsTypUfwd(System.Double@,System.Double@,System.Double@,System.Double@,System.Double@,System.Double@)">
+            <summary>
+            This function reads the typical forward voltage for the CHROLIS LEDs.
+            
+            </summary>
+            <param name="Typ__Ufwd_LED_1">
+            This parameter reports the typical forward voltage for LED1 [V].
+            </param>
+            <param name="Typ__Ufwd_LED_2">
+            This parameter reports the typical forward voltage for LED2 [V].
+            </param>
+            <param name="Typ__Ufwd_LED_3">
+            This parameter reports the typical forward voltage for LED3 [V].
+            </param>
+            <param name="Typ__Ufwd_LED_4">
+            This parameter reports the typical forward voltage for LED4 [V].
+            </param>
+            <param name="Typ__Ufwd_LED_5">
+            This parameter reports the typical forward voltage for LED5 [V].
+            </param>
+            <param name="Typ__Ufwd_LED_6">
+            This parameter reports the typical forward voltage for LED6 [V].
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readLED_HeadsColorCode(System.UInt32@,System.UInt32@,System.UInt32@,System.UInt32@,System.UInt32@,System.UInt32@)">
+            <summary>
+            This function reads the RGB color codes of the CHROLIS LEDs.
+            
+            The colors are coded as follows:
+            RED   value, 0 ... 255, in bits 16 ... 23 of result
+            GREEN value, 0 ... 255, in bits  8 ... 15 of result
+            BLUE  value, 0 ... 255, in lowest 8bit of result (bits 0 ... 7)
+            
+            Extract the values with (C-code):
+            red   = (result &amp; 0x00FF0000) &gt;&gt; 16;
+            green = (result &amp; 0x0000FF00) &gt;&gt;  8;
+            blue  = (result &amp; 0x000000FF) &gt;&gt;  0;
+            
+            </summary>
+            <param name="Color_Code_LED_1">
+            This parameter reports the RGB color code for LED1.
+            </param>
+            <param name="Color_Code_LED_2">
+            This parameter reports the RGB color code for LED2.
+            </param>
+            <param name="Color_Code_LED_3">
+            This parameter reports the RGB color code for LED3.
+            </param>
+            <param name="Color_Code_LED_4">
+            This parameter reports the RGB color code for LED4.
+            </param>
+            <param name="Color_Code_LED_5">
+            This parameter reports the RGB color code for LED5.
+            </param>
+            <param name="Color_Code_LED_6">
+            This parameter reports the RGB color code for LED6.
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readLED_HeadTimeMeter(System.UInt32@,System.UInt32@,System.UInt32@,System.UInt32@,System.UInt32@,System.UInt32@)">
+            <summary>
+            This function reads the elapsed operating time of the CHROLIS LEDs.
+            
+            The time values are reported in minutes.
+            
+            </summary>
+            <param name="Time_Meter_LED_1">
+            This parameter reports the elapsed operating time of LED1 [min].
+            </param>
+            <param name="Time_Meter_LED_2">
+            This parameter reports the elapsed operating time of LED2 [min].
+            </param>
+            <param name="Time_Meter_LED_3">
+            This parameter reports the elapsed operating time of LED3 [min].
+            </param>
+            <param name="Time_Meter_LED_4">
+            This parameter reports the elapsed operating time of LED4 [min].
+            </param>
+            <param name="Time_Meter_LED_5">
+            This parameter reports the elapsed operating time of LED5 [min].
+            </param>
+            <param name="Time_Meter_LED_6">
+            This parameter reports the elapsed operating time of LED6 [min].
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.startAdaptionLED(System.Byte)">
+            <summary>
+            This function starts an LED adaption cycle.
+            
+            The function will return immediately. For checking the progress of the adaption cycle or waiting for the end of the adaption cycle use
+            
+            TL6WL_readAdaptionProgressLED    or
+            TL6WL_readAdaptionProgressLED_Ex
+            
+            During the adaption cycle operation of the CHROLIS is limited to functions that do not interfere with the adaption, e.g. reading a temperature of an LED.
+            </summary>
+            <param name="LED_Nr_">
+            This parameter accepts the LED number.
+            Range 1 ... 6.
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.stopAdaptionLED">
+            <summary>
+            This function stops a currently running LED adaption cycle.
+            
+            The function is intended for emergency stops only!
+            Do not use the stop command unless absolutely necessary!
+            
+            If the LED adaption has not finished when this command is issued the LED does not get the necessary adjustment data to be operated safely.
+            
+            
+            </summary>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readAdaptionProgressLED(System.Double@)">
+            <summary>
+            This function provides the progress of the LED adaption cycle.
+            
+            The returned progress is measured in percent [%] in a range of 0% ... 100%.
+            
+            </summary>
+            <param name="LED_Adaption_Progress">
+            This parameter returns the LED adaption progress in percent [%].
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readAdaptionProgressLED_Ex(System.UInt32@,System.UInt32@,System.Text.StringBuilder,System.Double@,System.Double@)">
+            <summary>
+            This function provides the progress of the LED adaption cycle.
+            
+            The returned progress is measured in percent [%] in a range of 0% ... 100%.
+            
+            </summary>
+            <param name="Maximum_Step_Index">
+            This parameter returns the number of LED adaption steps that are executed during an LED adaption cycle.
+            
+            This is at the same time the maximum number that can be returned in parameter 'Current_Step_Index'.
+            
+            Note:
+            You may pass VI_NULL if you don't need this value.
+            
+            </param>
+            <param name="Current_Step_Index">
+            This parameter returns the index of the currently executed step  of an LED adaption cycle.
+            
+            The index runs from 1 to to a maximum number which is returned in parameter 'Maximum_Step_Index'.
+            
+            Note:
+            You may pass VI_NULL if you don't need this value.
+            
+            </param>
+            <param name="Step_Name">
+            This parameter returns a description of the currently executed LED adaption step.
+            
+            
+            Notes:
+            (1) The array must contain at least 120 elements ViChar[120].
+            (2) You may pass VI_NULL if you don't need this value.
+            
+            </param>
+            <param name="Step_Progress">
+            This parameter returns the LED adaption progress in percent [%].
+            
+            Note:
+            You may pass VI_NULL if you don't need this value.
+            
+            </param>
+            <param name="Overall_Progress">
+            This parameter returns the LED adaption progress in percent [%].
+            
+            Note:
+            You may pass VI_NULL if you don't need this value.
+            
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.writeAdaptionParameterLED(System.UInt32,System.Int32,System.Double)">
+            <summary>
+            This function allows to set or change parameters for the LED adaption.
+            
+            Note:
+            Do not use this function! The function is intended for optimizing some parameters when necessary by Thorlabs.
+            
+            
+            </summary>
+            <param name="Parameter_Index">
+            This parameter accepts the index for the parameter(s) to set for the LED adaption.
+            
+            Range 1 ... ?.
+            </param>
+            <param name="Integer_Parameter">
+            This parameter accepts an integer type parameter for the LED adaption.
+            
+            This is e.g. a value for the number of loops for an averaging of a measurement during the LED adaption cycle.
+            </param>
+            <param name="FP_Parameter">
+            This parameter accepts a floating point type parameter for the LED adaption.
+            
+            This is e.g. a value for a delay time in seconds for a measurement of a parameter after setting another parameter during the LED adaption cycle.
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readAdaptionParameterLED(System.UInt32,System.Int32@,System.Double@)">
+            <summary>
+            This function allows to read parameters of the LED adaption.
+            
+            Note:
+            Do not use this function! The function is intended for optimizing some parameters when necessary by Thorlabs.
+            
+            
+            </summary>
+            <param name="Parameter_Index">
+            This parameter accepts the index for the parameter(s) to set for the LED adaption.
+            
+            Range 1 ... ?.
+            </param>
+            <param name="Integer_Parameter">
+            This parameter returns an integer type parameter of the LED adaption.
+            
+            This is e.g. a value for the number of loops for an averaging of a measurement during the LED adaption cycle.
+            
+            Note:
+            You may pass VI_NULL if you don't need this value.
+            
+            </param>
+            <param name="FP_Parameter">
+            This parameter returns a floating point type parameter of the LED adaption.
+            
+            This is e.g. a value for a delay time in seconds for a measurement of a parameter after setting another parameter during the LED adaption cycle.
+            
+            Note:
+            You may pass VI_NULL if you don't need this value.
+            
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readFilter_HeadsName(System.Text.StringBuilder,System.Text.StringBuilder,System.Text.StringBuilder,System.Text.StringBuilder,System.Text.StringBuilder)">
+            <summary>
+            This function reads the names of all dichroit filters simultaneously.
+            </summary>
+            <param name="Name_Filter_1">
+            This parameter returns the name of dichroit filter 1.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="Name_Filter_2">
+            This parameter returns the name of dichroit filter 2.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="Name_Filter_3">
+            This parameter returns the name of dichroit filter 3.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="Name_Filter_4">
+            This parameter returns the name of dichroit filter 4.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="Name_Filter_5">
+            This parameter returns the name of dichroit filter 5.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readFilter_HeadsSerial(System.Text.StringBuilder,System.Text.StringBuilder,System.Text.StringBuilder,System.Text.StringBuilder,System.Text.StringBuilder)">
+            <summary>
+            This function reads the serial numbers of all 5 CHROLIS dichroit filters.
+            </summary>
+            <param name="SN_Filter_1">
+            This parameter reports serial numbers dichroit filter 1.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="SN_Filter_2">
+            This parameter reports serial numbers dichroit filter 2.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="SN_Filter_3">
+            This parameter reports serial numbers dichroit filter 3.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="SN_Filter_4">
+            This parameter reports serial numbers dichroit filter 4.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="SN_Filter_5">
+            This parameter reports serial numbers dichroit filter 5.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readFilter_HeadsManfDate(System.Text.StringBuilder,System.Text.StringBuilder,System.Text.StringBuilder,System.Text.StringBuilder,System.Text.StringBuilder)">
+            <summary>
+            This function reads the manufacture date of all dichroit filters simultaneously.
+            </summary>
+            <param name="Date_Filter_1">
+            This parameter returns the manufacture date of dichroit filter 1.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="Date_Filter_2">
+            This parameter returns the manufacture date of dichroit filter 2.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="Date_Filter_3">
+            This parameter returns the manufacture date of dichroit filter 3.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="Date_Filter_4">
+            This parameter returns the manufacture date of dichroit filter 4.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <param name="Date_Filter_5">
+            This parameter returns the manufacture date of dichroit filter 5.
+            
+            The buffer passed to this parameter must have at least TL6WL_SHORT_STRING_SIZE (20) characters.
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readFilterSpectrum(System.Byte,System.UInt16@,System.Int16[],System.Double[])">
+            <summary>
+            This function reads the transmission spectrum of the dichroit filter.
+            </summary>
+            <param name="Filter_Nr">
+            This parameter accepts the dichroit filter number.
+            Range 1 ... 5.
+            </param>
+            <param name="Data_Points">
+            This parameter returns the number of data points in the spectrum.
+            </param>
+            <param name="Wavelength">
+            This parameter returns an array of wavelengths [nm] for the spectrum of the dichroit filter.
+            
+            The array has to be at least of size FILTER_MAX_FILTER_SPEC_CURVE_DATA_POINTS (1000).
+            
+            </param>
+            <param name="Norm_Power">
+            This parameter returns an array of relative power [a.u.] for the transmission spectrum of the dichroit filter. Range is 0.0 ... 1.0.
+            
+            The array has to be at least of size FILTER_MAX_FILTER_SPEC_CURVE_DATA_POINTS (1000).
+            
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readFilterSpectrumRange(System.Byte,System.UInt16@,System.UInt16@)">
+            <summary>
+            This function returns the wavelength range of the dichroit filter in [nm].
+            </summary>
+            <param name="Filter_Nr_">
+            This parameter accepts the dichroit filter number.
+            Range 1 ... 5.
+            </param>
+            <param name="Min_Wavelength">
+            This parameter returns the lower limit of the dichroit filter's wavelength range [nm].
+            </param>
+            <param name="Max_Wavelength">
+            This parameter returns the upper limit of the dichroit filter's wavelength range [nm].
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readFilterTransmissionInterval(System.Byte,System.UInt16@,System.UInt16@)">
+            <summary>
+            This function returns the transmission wavelength range of the dichroit filter in [nm].
+            </summary>
+            <param name="Filter_Nr_">
+            This parameter accepts the dichroit filter number.
+            Range 1 ... 5.
+            </param>
+            <param name="Start_Trans__Wavelength">
+            This parameter returns the lower wavelength limit of the dichroit filter's transmission range [nm].
+            </param>
+            <param name="End_Trans__Wavelength">
+            This parameter returns the upper wavelength limit of the dichroit filter's transmission range [nm].
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readFilterReflectionInterval(System.Byte,System.UInt16@,System.UInt16@)">
+            <summary>
+            This function returns the refelction wavelength range of the dichroit filter in [nm].
+            </summary>
+            <param name="Filter_Nr_">
+            This parameter accepts the dichroit filter number.
+            Range 1 ... 5.
+            </param>
+            <param name="Start_Reflection_Wavelength">
+            This parameter returns the lower limit of the dichroit filter's reflection wavelength range [nm].
+            </param>
+            <param name="End_Reflection_Wavelength">
+            This parameter returns the upper limit of the dichroit filter's reflection wavelength range [nm].
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.readFilterCutOffWL(System.Byte,System.UInt16@)">
+            <summary>
+            This function returns the cut off wavelength of the dichroit filter in [nm].
+            </summary>
+            <param name="Filter_Nr_">
+            This parameter accepts the dichroit filter number.
+            Range 1 ... 5.
+            </param>
+            <param name="Cut_Off_Wavelength">
+            This parameter returns the cut off wavelength of the dichroit filter [nm].
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.TU_ProgramTestSequence(System.Boolean,System.UInt32)">
+            <summary>
+            This function programs a test sequence for the timing unit.
+            
+            The sequence is fixed. The user can only change the polarity and the active time (time per state of sequence).
+            </summary>
+            <param name="Active_Low">
+            This parameter accepts a value for the polarity of the output  signal(s).
+            
+            Set to VI_FALSE (0) for normal (active high) output.
+            Set to VI_TRUE  (1) for inverted (active low) output.
+            </param>
+            <param name="Active_Time__us_">
+            This parameter accepts the time [us] per state of the sequence.
+            
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.TU_ResetSequence">
+            <summary>
+            This function resets the sequence configuration of the timing unit.
+            
+            Use this function always at the beginning of programming a new sequence configuration.
+            
+            </summary>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.TU_AddGeneratedSelfRunningSignal(System.Byte,System.Boolean,System.UInt32,System.UInt32,System.UInt32,System.UInt32)">
+            <summary>
+            This function programs a signal of timing unit.
+            
+            This signal is generated by the timing unit itself and does not use an external trigger. The start trigger for the sequence is done by sending command TL6WL_StartStopGeneratorOutput_TU(). 
+            
+            Signals 1 ... 6 represent the LEDs 1 ... 6.
+            Signals 7 ... 12 represent the TTL outputs 1 ... 6.
+            
+            This timing unit runs with a resolution of 5us and internal 32-bit counters.
+            
+            Due to this limitation all time values used throughout the timing unit functions will always be rounded down to the next multiple of 5us and have a maximum value of 4.294.967.295 us.
+            
+            Note:
+            4.294.967.295 us represents a time of a little more than 1 hour and 11 minutes.
+            </summary>
+            <param name="Signal_Nr_">
+            This parameter accepts the signal channel.
+            
+            Channels 1 ... 6 represent LEDs 1 ... 6.
+            Channels 7 ... 12 represent the TTL outputs 1 ... 6
+            
+            </param>
+            <param name="Active_Low">
+            This parameter accepts a value for the polarity of the output  signal.
+            
+            Set to VI_FALSE (0) for normal (active high) output.
+            Set to VI_TRUE  (1) for inverted (active low) output.
+            </param>
+            <param name="Start_Delay__us_">
+            This parameter accepts the start delay time [us] for the signal.
+            </param>
+            <param name="Active_Time__us_">
+            This parameter accepts the active time [us] of the signal.
+            
+            </param>
+            <param name="Inactive_Time__us_">
+            This parameter accepts the inactive time [us] of the signal.
+            
+            </param>
+            <param name="Repitition_Count">
+            This parameter accepts the number of repititons for the signal.
+            
+            The range is from 1 ... 4294967295 (max. of 32-bit counters)
+            When yuo pass 0 the signal will be repeated infinitely.
+            
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.TU_AddGeneratedTriggeredSignal(System.Byte,System.Boolean,System.UInt32,System.UInt32,System.UInt32,System.UInt32)">
+            <summary>
+            This function programs a signal of timing unit.
+            
+            This signal is generated by the timing unit after an external trigger. The trigger input has to be set with command TL6WL_AddTriggerPoint_TU(). 
+            
+            After the trigger input signal the output signal will wait for 'start delay' then will be 'active' for 'active time' then will be 'inactive' for 'inactive time'. When 'repition count' is set so that the signal shall be repeated, the signal will again be 'active' for 'active time', 'inactive' for 'inactive time' and so on until the programmed number of repititions is elapsed.
+            
+            Signals 1 ... 6 represent the LEDs 1 ... 6.
+            Signals 7 ... 12 represent the TTL outputs 1 ... 6.
+            
+            This timing unit runs with a resolution of 5us and internal 32-bit counters.
+            
+            Due to this limitation all time values used throughout the timing unit functions will always be rounded down to the next multiple of 5us and have a maximum value of 4.294.967.295 us.
+            
+            Note:
+            4.294.967.295 us represents a time of a little more than 1 hour and 11 minutes.
+            </summary>
+            <param name="Signal_Nr_">
+            This parameter accepts the signal channel.
+            
+            Channels 1 ... 6 represent LEDs 1 ... 6.
+            Channels 7 ... 12 represent the TTL outputs 1 ... 6
+            
+            </param>
+            <param name="Active_Low">
+            This parameter accepts a value for the polarity of the output  signal.
+            
+            Set to VI_FALSE (0) for normal (active high) output.
+            Set to VI_TRUE  (1) for inverted (active low) output.
+            </param>
+            <param name="Start_Delay__us_">
+            This parameter accepts the start delay time [us] for the signal.
+            </param>
+            <param name="Active_Time__us_">
+            This parameter accepts the active time [us] of the signal.
+            
+            </param>
+            <param name="Inactive_Time__us_">
+            This parameter accepts the inactive time [us] of the signal.
+            
+            </param>
+            <param name="Repitition_Count">
+            This parameter accepts the number of repititons for the signal.
+            
+            The range is from 1 ... 4294967295 (max. of 32-bit counters)
+            When yuo pass 0 the signal will be repeated infinitely.
+            
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.TU_AddDirectlyTriggeredSignal(System.Byte)">
+            <summary>
+            This function programs a signal of timing unit.
+            
+            This output signal will toggle when a trigger condition set with command TL6WL_TU_AddTriggerPoint() is met.
+            
+            The toggling will start after the sequence is enabled by sending command TL6WL_StartStopGeneratorOutput_TU(). 
+            
+            Signals 1 ... 6 represent the LEDs 1 ... 6.
+            Signals 7 ... 12 represent the TTL outputs 1 ... 6.
+            
+            </summary>
+            <param name="Signal_Nr_">
+            This parameter accepts the signal channel.
+            
+            Channels 1 ... 6 represent LEDs 1 ... 6.
+            Channels 7 ... 12 represent the TTL outputs 1 ... 6
+            
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.TU_AddTriggerPoint(System.Byte,System.Boolean,System.UInt32,System.Int16)">
+            <summary>
+            This function programs a trigger point of the timing unit.
+            
+            A trigger point triggers one ore more of the signals programmed previously (!) with one of the commands:
+            TL6WL_TU_AddGeneratedTriggeredSignal()
+            TL6WL_TU_AddDirectlyTriggeredSignal()
+            
+            When the trigger conditions programmed with this command are met the programmend output signals will react accordingly.
+            
+            
+            Signals 1 ... 6 represent the input channels LED 1 ... 6.
+            Signals 7 ... 12 represent the AUX input channels 1 ... 6.
+            
+            </summary>
+            <param name="Signal_Nr_">
+            This parameter accepts the input trigger channel.
+            
+            Channels 1 ... 6 represent input LEDs 1 ... 6.
+            Channels 7 ... 12 represent input AUX 1 ... 6
+            
+            </param>
+            <param name="Starts_Low">
+            This parameter accepts a value for the polarity of the input  signal. The edge counter will start counting when the input signal corresponds to this value.
+            
+            Set to VI_FALSE (0) for normal (active high) input.
+            Set to VI_TRUE  (1) for inverted (active low) input.
+            </param>
+            <param name="Edge_Count">
+            This parameter accepts the number of input signal edges to be counted before a trigger will be issued.
+            
+            The range is from 1 ... 4294967295 (max. of 32-bit counters)
+            
+            
+            </param>
+            <param name="Affected_Signal_Bitmask">
+            This parameter accepts a bitmask for selecting the affected output channels. Each set bit in the mask enables the corresponding output channel.
+            
+            Bit  1, mask 0x0001, affects LED1.
+            Bit  2, mask 0x0002, affects LED2.
+            Bit  3, mask 0x0004, affects LED3.
+            Bit  4, mask 0x0008, affects LED4.
+            Bit  5, mask 0x0010, affects LED5.
+            Bit  6, mask 0x0020, affects LED6.
+            Bit  7, mask 0x0040, affects AUX1.
+            Bit  8, mask 0x0080, affects AUX2.
+            Bit  9, mask 0x0100, affects AUX3.
+            Bit 10, mask 0x0200, affects AUX4.
+            Bit 11, mask 0x0400, affects AUX5.
+            Bit 12, mask 0x0800, affects AUX6.
+            
+            
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+        <member name="M:Thorlabs.TL6WL_64.Interop.TL6WL.TU_StartStopGeneratorOutput_TU(System.Boolean)">
+            <summary>
+            This function starts or stops the timing unit generator.
+            
+            </summary>
+            <param name="Start">
+            This parameter accepts a value for starting or stopping the timing unit generator.
+            
+            Set to VI_FALSE (0) for stopping the generator.
+            Set to VI_TRUE  (1) for starting the generator.
+            </param>
+            <returns>
+            This is the error code returned by the function call. For error codes and descriptions see &lt;Error Message&gt;.
+            </returns>
+        </member>
+    </members>
+</doc>

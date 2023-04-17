@@ -1,0 +1,7 @@
+C:\Users\manzelmi\source\repos\Benchtop_Laser_Diode_Example\Benchtop_Laser_Diode_Example\bin\Debug\Benchtop_Laser_Diode_Example.exe.config
+C:\Users\manzelmi\source\repos\Benchtop_Laser_Diode_Example\Benchtop_Laser_Diode_Example\bin\Debug\Benchtop_Laser_Diode_Example.exe
+C:\Users\manzelmi\source\repos\Benchtop_Laser_Diode_Example\Benchtop_Laser_Diode_Example\bin\Debug\Benchtop_Laser_Diode_Example.pdb
+C:\Users\manzelmi\source\repos\Benchtop_Laser_Diode_Example\Benchtop_Laser_Diode_Example\obj\Debug\Benchtop_Laser_Diode_Example.csproj.AssemblyReference.cache
+C:\Users\manzelmi\source\repos\Benchtop_Laser_Diode_Example\Benchtop_Laser_Diode_Example\obj\Debug\Benchtop_Laser_Diode_Example.csproj.CoreCompileInputs.cache
+C:\Users\manzelmi\source\repos\Benchtop_Laser_Diode_Example\Benchtop_Laser_Diode_Example\obj\Debug\Benchtop_Laser_Diode_Example.exe
+C:\Users\manzelmi\source\repos\Benchtop_Laser_Diode_Example\Benchtop_Laser_Diode_Example\obj\Debug\Benchtop_Laser_Diode_Example.pdb
