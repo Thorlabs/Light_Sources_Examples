@@ -12,3 +12,5 @@
 *.obj
 *.zip
 *.xml
+!SLABHIDDevice.dll
+!SLABHIDtoUART.dll
