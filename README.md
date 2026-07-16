@@ -1,5 +1,5 @@
 # Light_Sources_Examples
-Software examples for Thorlabs products that emit light
+Software examples for Thorlabs products that emit light like lasers (S5FC1005S, S5FC1021S, S5FC1018S, S5FC1550S-A2,	S5FC1050P, S5FC1021P, S5FC1018P, S5FC1550P-A2, S5FC1005P,ULN15TK, DFB15TK, TLX1, TLX2), photon pair sources (SPDC810, SPDC810N, SPDC1550N) benchtop modulator driver (MX10A, MX10B, MX10C) and LED sources (CHROLIS, CHROLIS-C1, CHROLIS-C2)
 
 ## Repo Organization
 All examples are split up by programming language and product type. Directions on using specific examples are given within the folders.
